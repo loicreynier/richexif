@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "richexif"
+version = "0.0.0"
+description = "Wrapped around ExifTool to display metadata using Rich"
+authors = ["Loïc Reynier <loic+dev@loicreynier.fr>"]
+homepage = "https://github.com/loicreynier/richexif"
+license = "Unlicense"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+typer = "^0.9.0"
+typing-extensions = "^4.8.0"
+rich = "^13.7.1"
+pyexiftool = "^0.5.6"
+
+[tool.poetry.group.dev.dependencies]
+poetry = "^1.8.2"
+
+[tool.poetry.scripts]
+richexif = "richexif.main:app"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

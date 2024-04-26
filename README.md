@@ -1,0 +1,3 @@
+# `richexif`
+
+Wrapper around ExifTool for displaying metadata using Rich.
