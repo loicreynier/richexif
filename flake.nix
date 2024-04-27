@@ -21,7 +21,7 @@
       pythonPackage = with pkgs.python3.pkgs;
         buildPythonApplication {
           pname = "richexif";
-          version = "0-unstable-2024-04-26";
+          version = "0-unstable-2024-04-27";
           src = self;
           format = "pyproject";
 

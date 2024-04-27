@@ -20,11 +20,13 @@ DISPLAYS = {
 }
 
 
-def metadata(filepath: Path):
+def metadata(filepath: Path, filter: str | None = None):
     """Metadata dictionary extracted with ExifTool."""
     with exiftool.ExifToolHelper() as et:
-        dict_ = et.get_metadata(filepath)[0]  # Only one file -> `[0]`
-    return dict_
+        m = et.get_metadata(filepath)[0]  # Only one file -> `[0]`
+    if filter:
+        m = {k: v for k, v in m.items() if filter in k}
+    return m
 
 
 def metadata_table(filepath, metadata):
@@ -81,6 +83,12 @@ def display_metadata(
             resolve_path=True,
         ),
     ],
+    filter: Annotated[
+        str,
+        typer.Option(
+            help="String to match for displaying",
+        ),
+    ] = None,
     display: str = typer.Option(
         default="table",
         help="How to display the metadata",
@@ -89,7 +97,7 @@ def display_metadata(
     ),
 ):
     displayer = DISPLAYS[display]
-    meta = metadata(filepath)
+    meta = metadata(filepath, filter=filter)
     output = displayer(filepath, meta)
     console.print(output)
 
